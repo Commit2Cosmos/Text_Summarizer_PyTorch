@@ -20,9 +20,10 @@ ensure = "*"
 fastapi = "*"
 uvicorn = "*"
 jinja2 = "*"
-textsummarizer = {file = ".", editable = true}
+textsummarizer = {file = "."}
 
 [dev-packages]
+torch-tb-profiler = "*"
 
 [requires]
 python_version = "3.11"

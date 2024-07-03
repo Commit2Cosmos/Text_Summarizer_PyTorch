@@ -1,1 +1,12 @@
 *.egg-info
+__pycache__
+
+/logs
+/architecture
+/research
+/data
+
+**/test.py
+
+Pipfile
+Pipfile.lock
