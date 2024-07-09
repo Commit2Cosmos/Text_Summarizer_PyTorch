@@ -20,6 +20,7 @@ ensure = "*"
 fastapi = "*"
 uvicorn = "*"
 jinja2 = "*"
+evaluate = "*"
 textsummarizer = {file = "."}
 
 [dev-packages]

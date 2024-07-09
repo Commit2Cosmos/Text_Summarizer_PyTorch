@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "74eb137f727b386207ec414898d83e5a1a269230997cddb9e77f85bcebc5710a"
+            "sha256": "26aebf2128efb8587fb5e4367acaa5e0ef427b343cd5ba3027a69ccc4bb78d8d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -656,6 +656,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.6'",
             "version": "==1.0.4"
+        },
+        "evaluate": {
+            "hashes": [
+                "sha256:5fdcaf8a086b075c2b8e2c5898f501224b020b0ac7d07be76536e47e661c0c65",
+                "sha256:851ab767df8ec4031366c512eb88d8174adfba65d2c8c4c9bfdfe9c702212234"
+            ],
+            "index": "pypi",
+            "markers": "python_full_version >= '3.8.0'",
+            "version": "==0.4.2"
         },
         "executing": {
             "hashes": [
@@ -1620,7 +1629,7 @@
                 "sha256:f870204a840a60da0b12273ef34f7051e98c3b5961b61b0c2c1be6dfd64fbcd3",
                 "sha256:ffa75af20b44f8dba823498024771d5ac50620e6915abac414251bd971b4529f"
             ],
-            "markers": "python_version >= '3.9'",
+            "markers": "python_version == '3.11'",
             "version": "==1.26.4"
         },
         "orjson": {
@@ -3246,7 +3255,7 @@
                 "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d",
                 "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"
             ],
-            "markers": "python_version >= '3.8'",
+            "markers": "python_version < '3.12'",
             "version": "==4.12.2"
         },
         "tzdata": {
@@ -3975,7 +3984,7 @@
                 "sha256:f870204a840a60da0b12273ef34f7051e98c3b5961b61b0c2c1be6dfd64fbcd3",
                 "sha256:ffa75af20b44f8dba823498024771d5ac50620e6915abac414251bd971b4529f"
             ],
-            "markers": "python_version >= '3.9'",
+            "markers": "python_version == '3.11'",
             "version": "==1.26.4"
         },
         "pandas": {
