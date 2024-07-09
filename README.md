@@ -3,6 +3,19 @@
 This project aims to build a text summarizer with frontend using PyTorch and Hugging Face.
 
 
+## Workflow
+
+- `pyproject.toml`
+- `config.json`
+- `params.json`
+- `entity`
+- config manager in `src/config`
+- `src/components`
+- `src/pipeline`
+- `main.py`
+- `app.py`
+
+
 ## Milestones
 
 - [x] Choose and download the pre-trained model and dataset for transfer learning

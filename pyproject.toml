@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Text_Summarizer_PyTorch"
+version = "0.0.0"
+description = "A small python package for NLP app"
+readme = "README.md"
+authors = [
+    { name = "MrDote", email = "anton.belov.al7@gmail.com" }
+]
+url = "https://github.com/my_name/name"
+
+[project.urls]
+"Bug Tracker" = "https://github.com/my_name/name/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
