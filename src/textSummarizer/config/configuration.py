@@ -5,8 +5,8 @@ from textSummarizer.entity import DataIngestionConfig
 
 class ConfigManager:
     def __init__(self) -> None:
-        self.config = read_json(file_path=CONFIG_FILE_PATH)
-        self.params = read_json(file_path=PARAMS_FILE_PATH)
+        self.config = read_json(path_to_json=CONFIG_FILE_PATH)
+        self.params = read_json(path_to_json=PARAMS_FILE_PATH)
 
         create_directories([self.config.artifacts_root])
 
@@ -17,8 +17,8 @@ class ConfigManager:
         create_directories([config.root_dir])
         
         return DataIngestionConfig(
-            root_dir=config.root_dir,
+            root_dir=Path(config.root_dir),
             source_URL=config.source_URL,
-            local_data_file=config.local_data_file,
-            unzip_dir=config.unzip_dir
+            local_data_file=Path(config.local_data_file),
+            unzip_dir=Path(config.unzip_dir)
         )

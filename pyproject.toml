@@ -1,20 +1,3 @@
 [build-system]
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
-
-[project]
-name = "textSummarizer"
-version = "0.0.0"
-description = "A small python package for NLP app"
-readme = "README.md"
-authors = [
-    { name = "MrDote", email = "anton.belov.al7@gmail.com" }
-]
-url = "https://github.com/Commit2Cosmos/Text_Summarizer_PyTorch"
-
-[project.urls]
-"Bug Tracker" = "https://github.com/Commit2Cosmos/Text_Summarizer_PyTorch/issues"
-
-[tool.setuptools]
-packages = find:
-where = ["src"]

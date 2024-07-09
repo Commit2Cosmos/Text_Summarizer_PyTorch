@@ -19,6 +19,7 @@ fastapi = "*"
 polars = "*"
 uvicorn = "*"
 evaluate = "*"
+textsummarizer = {file = ".", editable = true}
 
 [dev-packages]
 torch-tb-profiler = "*"
