@@ -5,15 +5,19 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 
 ## Workflow
 
-- `pyproject.toml`
-- `config.json`
-- `params.json`
-- `entity`
-- config manager in `src/config`
-- `src/components`
-- `src/pipeline`
-- `main.py`
-- `app.py`
+See [architecture](./architecture/architecture.excalidraw) file for detailed breakdown of the project's architecture and what each file does.
+
+- [x] `logging.py`
+- [x] `pyproject.toml`
+
+- [ ] `config.json`
+- [ ] `params.json`
+- [ ] `src/entity`
+- [ ] `src/config`
+- [ ] `src/components`
+- [ ] `src/pipeline`
+- [ ] `main.py`
+- [ ] `app.py`
 
 
 ## Milestones

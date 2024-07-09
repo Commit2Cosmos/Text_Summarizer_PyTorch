@@ -7,8 +7,6 @@ name = "pypi"
 transformers = {extras = ["sentencepiece"], version = "*"}
 datasets = "*"
 rouge-score = "*"
-py7zr = "*"
-pandas = "*"
 nltk = "*"
 tqdm = "*"
 matplotlib = "*"
@@ -18,10 +16,9 @@ mypy-boto3-s3 = "*"
 python-box = "*"
 ensure = "*"
 fastapi = "*"
+polars = "*"
 uvicorn = "*"
-jinja2 = "*"
 evaluate = "*"
-textsummarizer = {file = "."}
 
 [dev-packages]
 torch-tb-profiler = "*"

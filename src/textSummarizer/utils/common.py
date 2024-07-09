@@ -1,10 +1,11 @@
 import json
 import os
-from textSummarizer.loggin import logger
+from textSummarizer.logging import logger
 from pathlib import Path
 from box import ConfigBox
 from box.exceptions import BoxValueError
 from ensure import ensure_annotations
+from typing import List
 
 
 @ensure_annotations
@@ -22,7 +23,7 @@ def read_json(path_to_json: Path) -> ConfigBox:
     
 
 @ensure_annotations
-def create_directories(list_of_paths: list, verbose = True):
+def create_directories(list_of_paths: List[Path], verbose = True):
     for dir in list_of_paths:
         os.makedirs(dir, exist_ok=True)
         if verbose:
