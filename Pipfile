@@ -21,6 +21,7 @@ uvicorn = "*"
 evaluate = "*"
 torch = "*"
 textsummarizer = {file = ".", editable = true}
+accelerate = "*"
 
 [dev-packages]
 torch-tb-profiler = "*"

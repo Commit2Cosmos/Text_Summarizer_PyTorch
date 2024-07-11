@@ -1,3 +1,4 @@
+import torch
 from textSummarizer.utils.common import read_json, create_directories
 from textSummarizer.constants import *
 from textSummarizer.entity import *
@@ -7,6 +8,13 @@ class ConfigManager:
     def __init__(self):
         self.config = read_json(path_to_json=CONFIG_FILE_PATH)
         self.params = read_json(path_to_json=PARAMS_FILE_PATH)
+
+        if torch.cuda.is_available():
+            self.device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
 
         create_directories([self.config.artifacts_root])
 
@@ -38,16 +46,48 @@ class ConfigManager:
 
     def get_data_transformation_config(self) -> DataTransformationConfig:
         config = self.config.data_transformation
-        datasets = self.config.datasets
         data_folder = self.config.data_ingestion.root_dir
+        datasets = self.config.datasets
         params = self.params.transformation_args
+
+        create_directories([config.root_dir])
 
         return DataTransformationConfig(
             root_dir=Path(config.root_dir),
             dataset_folder=Path(data_folder),
             datasets=datasets,
-            tokenizer=config.tokenizer,
-            batch_size=config.batch_size,
+            model_ckpt=config.model_ckpt,
+
+            batch_size=params.batch_size,
             input_max_length=params.input_max_length,
             target_max_length=params.target_max_length
+        )
+    
+
+    def get_model_training_config(self) -> ModelTrainingConfig:
+        config = self.config.model_training
+        data_folder = self.config.data_transformation.root_dir
+        datasets = self.config.datasets
+        model_ckpt = self.config.data_transformation.model_ckpt
+        params = self.params.training_args
+
+        create_directories([config.root_dir])
+
+        return ModelTrainingConfig(
+            root_dir=Path(config.root_dir),
+            dataset_folder=Path(data_folder),
+            datasets=datasets,
+            model_ckpt=model_ckpt,
+            device=self.device,
+
+            num_train_epochs=params.num_train_epochs,
+            per_device_train_batch_size=params.per_device_train_batch_size,
+            per_device_eval_batch_size=params.per_device_eval_batch_size,
+            warmup_steps=params.warmup_steps,
+            weight_decay=params.weight_decay,
+            logging_steps=params.logging_steps,
+            eval_strategy=params.eval_strategy,
+            eval_steps=params.eval_steps,
+            save_steps=params.save_steps,
+            gradient_accumulation_steps=params.gradient_accumulation_steps
         )

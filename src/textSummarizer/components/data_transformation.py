@@ -10,7 +10,7 @@ class DataTransformation:
     def __init__(self, config: DataTransformationConfig):
         self.config = config
         
-        self.tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.config.model_ckpt)
 
     
     def __convert_egs_to_features(self, batch):

@@ -1,6 +1,7 @@
 from textSummarizer.pipeline.data_ingestion_pipeline import DataIngestionPipeline
 from textSummarizer.pipeline.data_validation_pipeline import DataValidationPipeline
 from textSummarizer.pipeline.data_transformation_pipeline import DataTransformationPipeline
+from textSummarizer.pipeline.model_training_pipeline import ModelTrainingPipeline
 
 from textSummarizer.utils.common import run_pipeline
 
@@ -8,9 +9,10 @@ from textSummarizer.utils.common import run_pipeline
 data_ingestion_pipeline = DataIngestionPipeline()
 data_validation_pipeline = DataValidationPipeline()
 data_transformation_pipeline = DataTransformationPipeline()
+model_training_pipeline = ModelTrainingPipeline()
 
 
-pipelines = [data_ingestion_pipeline, data_validation_pipeline, data_transformation_pipeline]
+pipelines = [model_training_pipeline]
     
 
 if __name__ == "__main__":
