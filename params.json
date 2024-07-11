@@ -1,3 +1,6 @@
 {
-    "dummy_key": "dummy_value"
+    "transformation_args": {
+        "input_max_length": 1024,
+        "target_max_length": 128
+    }
 }

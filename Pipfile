@@ -19,6 +19,7 @@ fastapi = "*"
 polars = "*"
 uvicorn = "*"
 evaluate = "*"
+torch = "*"
 textsummarizer = {file = ".", editable = true}
 
 [dev-packages]

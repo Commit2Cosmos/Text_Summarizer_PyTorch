@@ -34,3 +34,20 @@ class ConfigManager:
             required_folders=config.required_folders,
             required_files=config.required_files
         )
+    
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+        datasets = self.config.datasets
+        data_folder = self.config.data_ingestion.root_dir
+        params = self.params.transformation_args
+
+        return DataTransformationConfig(
+            root_dir=Path(config.root_dir),
+            dataset_folder=Path(data_folder),
+            datasets=datasets,
+            tokenizer=config.tokenizer,
+            batch_size=config.batch_size,
+            input_max_length=params.input_max_length,
+            target_max_length=params.target_max_length
+        )

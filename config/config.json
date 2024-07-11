@@ -1,17 +1,26 @@
 {
     "artifacts_root": "artifacts",
 
+
     "datasets": {
         "samsum_dataset_test_eval": "https://github.com/Commit2Cosmos/Datasets/raw/main/samsum_dataset_test_eval.zip"
     },
+
 
     "data_ingestion": {
         "root_dir": "artifacts/data_ingestion"
     },
 
+
     "data_validation" : {
-        "root_dir": "artifacts/data_validation",
         "required_folders": ["test", "validation"],
         "required_files": ["data-*.arrow", "dataset_info.json", "state.json"]
+    },
+
+
+    "data_transformation": {
+        "root_dir": "artifacts/data_transformation",
+        "tokenizer": "google/pegasus-cnn_dailymail",
+        "batch_size": 1
     }
 }

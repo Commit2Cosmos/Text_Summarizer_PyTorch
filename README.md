@@ -4,6 +4,12 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 
 
 
+## TODO
+
+- Write unit tests for **Data Transformation** pipeline
+
+
+
 ## Milestones
 
 - [x] Choose and download the pre-trained model and dataset for transfer learning
@@ -24,7 +30,7 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 
 - [x] Data Ingestion
 - [x] Data Validation
-- [ ] Data Transformation + Feature Engineering
+- [x] Data Transformation + Feature Engineering
 - [ ] Model Training
 - [ ] Model Evaluation
 
@@ -36,8 +42,9 @@ See [architecture](./architecture/architecture.excalidraw) file for detailed bre
 
 - `logging.py`
 - `pyproject.toml`
-- `config.json`
 - `params.json`
+
+- `config.json`
 - `src/entity`
 - `src/config`
 - `src/components`
