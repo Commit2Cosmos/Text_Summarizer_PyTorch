@@ -1,5 +1,5 @@
 
-#* custom logger: logs to folder "logs/running_logs.log" and 
+#* custom logger: logs to folder "logs/running_logs.log"
 import os
 import sys
 import logging

@@ -29,13 +29,19 @@ def create_directories(list_of_paths: List, verbose = True):
     for dir in list_of_paths:
         os.makedirs(dir, exist_ok=True)
         if verbose:
-            logger.info(f"directory at {dir} has been created")
+            logger.info(f"Created directory at {dir}")
 
 
 @ensure_annotations
-def get_size_of_file(file_path: Path):
-    size_in_kb = os.path.getsize(file_path)
-    return f"size of {file_path} is {size_in_kb}"
+def get_size_of_folder(start_path: str):
+    total_size = 0
+    for dirpath, _, filenames in os.walk(start_path):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            if not os.path.islink(fp):
+                total_size += os.path.getsize(fp)
+
+    return total_size
 
 
 

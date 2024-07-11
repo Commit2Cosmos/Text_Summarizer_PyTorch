@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List, Dict
 from pathlib import Path
 
 
@@ -12,6 +13,12 @@ class Pipeline:
 @dataclass(frozen=True)
 class DataIngestionConfig:
     root_dir: Path
-    source_URL: str
-    local_data_file: Path
-    unzip_dir: Path
+    datasets: Dict[str, str]
+
+
+@dataclass(frozen=True)
+class DataValidationConfig:
+    dataset_folder: Path
+    datasets: List[str]
+    required_folders: List[str]
+    required_files: List[str]
