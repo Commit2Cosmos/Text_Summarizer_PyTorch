@@ -11,5 +11,5 @@ class DataValidationPipeline(Pipeline):
     def main(self):
         config = ConfigManager()
         data_validation_config = config.get_data_validation_config()
-        data_ingestion = DataValidation(config=data_validation_config)
-        data_ingestion.validate_files_exist()
+        data_validation = DataValidation(config=data_validation_config)
+        data_validation.validate_files_exist()

@@ -20,7 +20,11 @@
 
     "data_transformation": {
         "root_dir": "artifacts/data_transformation",
-        "tokenizer": "google/pegasus-cnn_dailymail",
-        "batch_size": 1
+        "model_ckpt": "google/pegasus-cnn_dailymail"
+    },
+
+
+    "model_training": {
+        "root_dir": "artifacts/model_training"
     }
 }

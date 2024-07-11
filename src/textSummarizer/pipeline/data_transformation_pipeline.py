@@ -11,5 +11,5 @@ class DataTransformationPipeline(Pipeline):
     def main(self):
         config = ConfigManager()
         data_transformation_config = config.get_data_transformation_config()
-        data_ingestion = DataTransformation(config=data_transformation_config)
-        data_ingestion.save_features()
+        data_transformation = DataTransformation(config=data_transformation_config)
+        data_transformation.save_features()

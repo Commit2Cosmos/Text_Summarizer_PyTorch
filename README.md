@@ -31,7 +31,7 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 - [x] Data Ingestion
 - [x] Data Validation
 - [x] Data Transformation + Feature Engineering
-- [ ] Model Training
+- [x] Model Training
 - [ ] Model Evaluation
 
 
