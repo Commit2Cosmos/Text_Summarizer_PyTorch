@@ -7,6 +7,7 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 ## TODO
 
 - Write unit tests for **Data Transformation** pipeline
+- Change training + evaluation components to work with multiple datasets
 
 
 
@@ -32,7 +33,7 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 - [x] Data Validation
 - [x] Data Transformation + Feature Engineering
 - [x] Model Training
-- [ ] Model Evaluation
+- [x] Model Evaluation
 
 
 

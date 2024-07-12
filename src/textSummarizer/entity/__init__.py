@@ -57,3 +57,23 @@ class ModelTrainingConfig:
     eval_steps: int
     save_steps: int
     gradient_accumulation_steps: int
+
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    dataset_folder: Path
+    datasets: Dict[str, str]
+    trained_folder: Path
+    tokenizer_ckpt: str
+    model_ckpt: str
+    metric_name: str
+    metric_file: str
+    device: device
+
+    input_max_length: int
+    target_max_length: int
+    length_penalty: float
+
+    #* params.json
+    batch_size: int

@@ -91,3 +91,34 @@ class ConfigManager:
             save_steps=params.save_steps,
             gradient_accumulation_steps=params.gradient_accumulation_steps
         )
+    
+    
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        data_folder = self.config.data_transformation.root_dir
+        datasets = self.config.datasets
+        trained_folder = self.config.model_training.root_dir
+        tokenizer_ckpt = self.config.data_transformation.model_ckpt
+        params = self.params.eval_args
+        input_max_length = self.params.transformation_args.input_max_length
+        target_max_length = self.params.transformation_args.target_max_length
+
+        create_directories([config.root_dir])
+
+        return ModelEvaluationConfig(
+            root_dir=Path(config.root_dir),
+            dataset_folder=Path(data_folder),
+            datasets=datasets,
+            trained_folder=Path(trained_folder),
+            tokenizer_ckpt=tokenizer_ckpt,
+            model_ckpt=config.model_ckpt,
+            metric_name=config.metric_name,
+            metric_file=config.metric_file,
+            device=self.device,
+            
+            input_max_length=input_max_length,
+            target_max_length=target_max_length,
+
+            batch_size=params.per_device_eval_batch_size,
+            length_penalty=params.length_penalty
+        )
