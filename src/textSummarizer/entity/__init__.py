@@ -44,6 +44,7 @@ class ModelTrainingConfig:
     dataset_folder: Path
     datasets: Dict[str, str]
     model_ckpt: str
+    trained_model_ckpt: str
     device: device
 
     #* params.json
@@ -66,14 +67,15 @@ class ModelEvaluationConfig:
     datasets: Dict[str, str]
     trained_folder: Path
     tokenizer_ckpt: str
-    model_ckpt: str
+    trained_model_ckpt: str
     metric_name: str
     metric_file: str
     device: device
 
     input_max_length: int
     target_max_length: int
-    length_penalty: float
 
     #* params.json
     batch_size: int
+    length_penalty: float
+    num_beams: int

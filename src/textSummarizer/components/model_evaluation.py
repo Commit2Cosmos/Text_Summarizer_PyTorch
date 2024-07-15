@@ -20,7 +20,7 @@ class ModelEvaluation:
         tokenizer = AutoTokenizer.from_pretrained(os.path.join(self.config.trained_folder, self.config.tokenizer_ckpt))
 
         rouge_metric = evaluate.load(self.config.metric_name)
-        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(os.path.join(self.config.trained_folder, self.config.model_ckpt)).to(self.config.device)
+        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(os.path.join(self.config.trained_folder, self.config.trained_model_ckpt)).to(self.config.device)
 
 
         def generate_batch_sized_chunks(list_of_elements, batch_size):
@@ -42,7 +42,7 @@ class ModelEvaluation:
                 summaries = model_pegasus.generate(input_ids=inputs["input_ids"].to(self.config.device),
                                                    attention_mask=inputs["attention_mask"].to(self.config.device),
                                                    length_penalty=self.config.length_penalty,
-                                                   num_beams=8,
+                                                   num_beams=self.config.num_beams,
                                                    max_length=self.config.target_max_length)
                 
                 decoded_summaries = [tokenizer.decode(s, skip_special_tokens=True, clean_up_tokenization_spaces=True) for s in summaries]      

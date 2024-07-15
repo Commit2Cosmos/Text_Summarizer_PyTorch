@@ -14,7 +14,7 @@ class ModelTraining:
     def train(self):
     
         tokenizer = AutoTokenizer.from_pretrained(self.config.model_ckpt)
-        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to('cpu')
+        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to(self.config.device)
         seq2seq_DC = DataCollatorForSeq2Seq(tokenizer, model=model_pegasus)
 
         trainer_args = TrainingArguments(
@@ -28,8 +28,7 @@ class ModelTraining:
             eval_strategy=self.config.eval_strategy,
             eval_steps=self.config.eval_steps,
             save_steps=self.config.save_steps,
-            gradient_accumulation_steps=self.config.gradient_accumulation_steps,
-            use_cpu=True
+            gradient_accumulation_steps=self.config.gradient_accumulation_steps
         )
 
         for ds_name in self.config.datasets:
@@ -39,23 +38,23 @@ class ModelTraining:
 
             logger.info(f"Dataset loaded, staring training!")
             
-            # try:
+            try:
 
-            trainer = Trainer(
-                model = model_pegasus,
-                args = trainer_args,
-                tokenizer = tokenizer,
-                data_collator=seq2seq_DC,
-                train_dataset=ds['test'],
-                eval_dataset=ds['validation']
-            )
+                trainer = Trainer(
+                    model = model_pegasus,
+                    args = trainer_args,
+                    tokenizer = tokenizer,
+                    data_collator=seq2seq_DC,
+                    train_dataset=ds['test'],
+                    eval_dataset=ds['validation']
+                )
 
-            trainer.train()
+                trainer.train()
 
-            model_pegasus.save_pretrained(os.path.join(self.config.root_dir, f"pegasus-{ds_name}-model"))
-            tokenizer.save_pretrained(os.path.join(self.config.root_dir, f"{ds_name}-tokenizer"))
+                model_pegasus.save_pretrained(os.path.join(self.config.root_dir, f"{self.config.trained_model_ckpt}-model"))
+                tokenizer.save_pretrained(os.path.join(self.config.root_dir, f"{self.config.trained_model_ckpt}-tokenizer"))
 
-            # except Exception as e:
-            #     logger.error(f"Error in training: {e}")
+            except Exception as e:
+                logger.error(f"Error in training: {e}")
 
             logger.info(f"Training completed for dataset: {ds_name}! Model and tokenizer saved!")

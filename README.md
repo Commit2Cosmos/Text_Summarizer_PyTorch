@@ -6,17 +6,17 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 
 ## TODO
 
-- Write unit tests for **Data Transformation** pipeline
-- Change training + evaluation components to work with multiple datasets
-
+- Write unit tests for **Data Transformation** and **Model Evaluation** pipeline
+- Change training + evaluation components to work with multiple datasets (dynamic saving file paths etc)
+- Add `num_beams` to config file
 
 
 ## Milestones
 
 - [x] Choose and download the pre-trained model and dataset for transfer learning
-- [ ] Build pipelines (listed below)
-- [ ] Fine-tune the model
-- [ ] Model packaging (serialisation, containerisation)
+- [x] Build pipelines (listed below)
+- [ ] Check for transfer learning or **fine-tuning** (Untrained layers are already provided, so just train them -> update training pipeline)
+- [ ] Model packaging (serialisation, containerisation) -> Docker
 - [ ] Choose deployment strategy (cloud or local) and interaction type (API, **webapp**, cli, embedded systems)
 - [ ] Build + deploy the webapp
 - [ ] Deploy the model (one-off)
@@ -34,6 +34,7 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 - [x] Data Transformation + Feature Engineering
 - [x] Model Training
 - [x] Model Evaluation
+- [ ] Model Inference
 
 
 
