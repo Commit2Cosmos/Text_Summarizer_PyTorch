@@ -14,8 +14,8 @@ model_training_pipeline = ModelTrainingPipeline()
 model_evaluation_pipeline = ModelEvaluationPipeline()
 
 
-pipelines = [model_evaluation_pipeline]
-    
+pipelines = [data_ingestion_pipeline, data_validation_pipeline, data_transformation_pipeline, model_training_pipeline, model_evaluation_pipeline]
+
 
 if __name__ == "__main__":
     for pipeline in pipelines:

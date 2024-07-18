@@ -65,9 +65,11 @@ class ModelEvaluationConfig:
     root_dir: Path
     dataset_folder: Path
     datasets: Dict[str, str]
+
     trained_folder: Path
-    tokenizer_ckpt: str
     trained_model_ckpt: str
+    trained_tokenizer_ckpt: str
+    
     metric_name: str
     metric_file: str
     device: device

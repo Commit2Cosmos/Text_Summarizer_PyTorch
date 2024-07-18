@@ -100,7 +100,7 @@ class ConfigManager:
         datasets = self.config.datasets
         trained_folder = self.config.model_training.root_dir
         trained_model_ckpt = self.config.model_training.trained_model_ckpt
-        tokenizer_ckpt = self.config.data_transformation.model_ckpt
+        trained_tokenizer_ckpt = self.config.model_training.trained_tokenizer_ckpt
         params = self.params.eval_args
         input_max_length = self.params.transformation_args.input_max_length
         target_max_length = self.params.transformation_args.target_max_length
@@ -111,9 +111,11 @@ class ConfigManager:
             root_dir=Path(config.root_dir),
             dataset_folder=Path(data_folder),
             datasets=datasets,
+
             trained_folder=Path(trained_folder),
             trained_model_ckpt=trained_model_ckpt,
-            tokenizer_ckpt=tokenizer_ckpt,
+            trained_tokenizer_ckpt=trained_tokenizer_ckpt,
+            
             metric_name=config.metric_name,
             metric_file=config.metric_file,
             device=self.device,
@@ -121,7 +123,7 @@ class ConfigManager:
             input_max_length=input_max_length,
             target_max_length=target_max_length,
 
-            batch_size=params.per_device_eval_batch_size,
+            batch_size=params.batch_size,
             length_penalty=params.length_penalty,
             num_beams=params.num_beams
         )

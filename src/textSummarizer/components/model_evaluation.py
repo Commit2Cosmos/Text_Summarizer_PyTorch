@@ -17,10 +17,10 @@ class ModelEvaluation:
 
     def evaluate(self):
 
-        tokenizer = AutoTokenizer.from_pretrained(os.path.join(self.config.trained_folder, self.config.tokenizer_ckpt))
+        tokenizer = AutoTokenizer.from_pretrained(os.path.join(self.config.trained_folder, f'{self.config.trained_tokenizer_ckpt}-tokenizer'))
 
         rouge_metric = evaluate.load(self.config.metric_name)
-        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(os.path.join(self.config.trained_folder, self.config.trained_model_ckpt)).to(self.config.device)
+        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(os.path.join(self.config.trained_folder, f'{self.config.trained_model_ckpt}-model')).to('cpu')
 
 
         def generate_batch_sized_chunks(list_of_elements, batch_size):
@@ -39,8 +39,8 @@ class ModelEvaluation:
                 
                 inputs = tokenizer(article_batch, max_length=self.config.input_max_length, truncation=True, padding="max_length", return_tensors="pt")
                 
-                summaries = model_pegasus.generate(input_ids=inputs["input_ids"].to(self.config.device),
-                                                   attention_mask=inputs["attention_mask"].to(self.config.device),
+                summaries = model_pegasus.generate(input_ids=inputs["input_ids"].to('cpu'),
+                                                   attention_mask=inputs["attention_mask"].to('cpu'),
                                                    length_penalty=self.config.length_penalty,
                                                    num_beams=self.config.num_beams,
                                                    max_length=self.config.target_max_length)
@@ -53,5 +53,5 @@ class ModelEvaluation:
                 
             score = rouge_metric.compute()
             
-            with open(os.path.join(self.config.eval_folder, self.config.metric_file), 'w') as f:
+            with open(os.path.join(self.config.root_dir, self.config.metric_file), 'w') as f:
                 json.dump(score, f)

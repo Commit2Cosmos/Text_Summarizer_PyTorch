@@ -26,12 +26,13 @@
 
     "model_training": {
         "root_dir": "artifacts/model_training",
-        "trained_model_ckpt": "pegasus-samsum_dataset_test_eval"
+        "trained_model_ckpt": "pegasus-samsum_dataset_test_eval",
+        "trained_tokenizer_ckpt": "pegasus-samsum_dataset_test_eval"
     },
 
     "model_evaluation": {
         "root_dir": "artifacts/model_evaluation",
-        "metric_name": "rouge1",
+        "metric_name": "rouge",
         "metric_file": "metric.json"
     }
 }

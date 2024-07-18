@@ -33,3 +33,4 @@ class DataValidation:
 
         except Exception as e:
             logger.error(f"Error in validate_files_exist: {e}")
+            raise e
