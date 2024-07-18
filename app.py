@@ -15,7 +15,7 @@ async def index():
 
 
 
-@app.get("/train")
+@app.get("/train", tags=["Training"])
 async def training():
     try:
         os.system("python main.py")
@@ -26,12 +26,12 @@ async def training():
     
 
 
-@app.post("/predict")
+@app.post("/predict", tags=["Inference"])
 async def predict_route(text):
     try:
 
         obj = ModelInferencePipeline()
-        text = obj.main(text)
+        text = obj.main(input_text=text)
 
         return text
     

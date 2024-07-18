@@ -9,6 +9,10 @@ This project aims to build a text summarizer with frontend using PyTorch and Hug
 - Write unit tests for **Data Transformation** and **Model Evaluation** pipeline
 - Change training + evaluation components to work with multiple datasets (dynamic saving file paths etc)
 - Add `num_beams` to config file
+- Freeze the last layer to test training and evaluation pipelines
+- Resolve `Some non-default generation parameters are set in the model config. These should go into a GenerationConfig file`
+
+- Raise issue of the incorrect warning about that model needs to be trained because of newly initialised encoding layers
 
 
 ## Milestones

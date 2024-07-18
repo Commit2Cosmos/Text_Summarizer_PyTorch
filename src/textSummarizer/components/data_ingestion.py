@@ -25,6 +25,7 @@ class DataIngestion:
 
                 except Exception as e:
                     logger.error(f"Error in download_data: {e}")
+                    raise e
             else:
                 logger.info(f'Data folder already exists, folder size: {get_size_of_folder(os.path.join(self.config.root_dir, ds))}')
 

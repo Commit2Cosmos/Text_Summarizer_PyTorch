@@ -3,9 +3,12 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+url = "https://download.pytorch.org/whl/nightly/cpu"
+verify_ssl = true
+name = "pytorch-nightly"
+
 [packages]
-transformers = {extras = ["sentencepiece"], version = "*"}
-datasets = "*"
 rouge-score = "*"
 nltk = "*"
 tqdm = "*"
@@ -19,9 +22,12 @@ fastapi = "*"
 polars = "*"
 uvicorn = "*"
 evaluate = "*"
-torch = "*"
+torch = {version = "*", index = "pytorch-nightly"}
 textsummarizer = {file = ".", editable = true}
 accelerate = "*"
+torchinfo = "*"
+transformers = "*"
+datasets = "*"
 
 [dev-packages]
 torch-tb-profiler = "*"
@@ -29,3 +35,6 @@ torch-tb-profiler = "*"
 [requires]
 python_version = "3.11"
 python_full_version = "3.11.4"
+
+[pipenv]
+allow_prereleases = true

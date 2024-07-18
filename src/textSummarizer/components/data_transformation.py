@@ -28,5 +28,10 @@ class DataTransformation:
         
         for ds_name in self.config.datasets:
             ds = load_from_disk(os.path.join(self.config.dataset_folder, ds_name))
+
+            #! TESTING
+            for name in ['test', 'validation']:
+                ds[name] = ds[name].select(range(20))
+
             ds = ds.map(self.__convert_egs_to_features, batched = True, batch_size=self.config.batch_size)
             ds.save_to_disk(os.path.join(self.config.root_dir, ds_name))

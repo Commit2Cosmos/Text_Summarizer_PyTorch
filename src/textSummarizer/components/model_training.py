@@ -1,8 +1,9 @@
 import os
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, DataCollatorForSeq2Seq, TrainingArguments, Trainer
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, DataCollatorForSeq2Seq, TrainingArguments, Trainer, PreTrainedModel
 from datasets import load_from_disk
 from textSummarizer.entity import ModelTrainingConfig
 from textSummarizer.logging import logger
+import torch
 
 
 
@@ -14,8 +15,20 @@ class ModelTraining:
     def train(self):
     
         tokenizer = AutoTokenizer.from_pretrained(self.config.model_ckpt)
-        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to(self.config.device)
-        seq2seq_DC = DataCollatorForSeq2Seq(tokenizer, model=model_pegasus)
+        model_pegasus: PreTrainedModel = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to('cpu')
+
+        #* freeze all layers
+        for param in model_pegasus.parameters():
+            param.requires_grad = False
+
+        #* unfreeze newly initialized layers
+        for name, param in model_pegasus.named_parameters():
+            if name.startswith("model.decoder.layers.15") or name.startswith("model.encoder.layers.15"):
+                param.requires_grad = True
+
+
+        seq2seq_DC = DataCollatorForSeq2Seq(tokenizer, model = model_pegasus)
+
 
         trainer_args = TrainingArguments(
             output_dir = self.config.root_dir,
@@ -28,13 +41,17 @@ class ModelTraining:
             eval_strategy=self.config.eval_strategy,
             eval_steps=self.config.eval_steps,
             save_steps=self.config.save_steps,
-            gradient_accumulation_steps=self.config.gradient_accumulation_steps
+            #TODO: ADD TO PARAMS
+            save_total_limit=1,
+            gradient_accumulation_steps=self.config.gradient_accumulation_steps,
+            use_cpu=True
         )
 
         for ds_name in self.config.datasets:
 
             logger.info(f"Loading dataset: {ds_name}...")
             ds = load_from_disk(os.path.join(self.config.dataset_folder, ds_name))
+            # ds.set_format('torch', device="mps")
 
             logger.info(f"Dataset loaded, staring training!")
             
@@ -56,5 +73,6 @@ class ModelTraining:
 
             except Exception as e:
                 logger.error(f"Error in training: {e}")
+                raise e
 
             logger.info(f"Training completed for dataset: {ds_name}! Model and tokenizer saved!")

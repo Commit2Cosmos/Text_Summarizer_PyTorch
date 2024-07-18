@@ -14,10 +14,10 @@ class ModelInferencePipeline(Pipeline):
 
     
 
-    def infer(self, input_text: str):
+    def main(self, input_text: str):
         
         tokenizer = AutoTokenizer.from_pretrained(os.path.join(self.config.trained_folder, f"{self.config.trained_model_ckpt}-tokenizer"))
-        pip_kwargs = {
+        pipe_kwargs = {
             "length_penalty": self.config.length_penalty,
             "num_beams": self.config.num_beams,
             "max_length": self.config.target_max_length
@@ -32,6 +32,8 @@ class ModelInferencePipeline(Pipeline):
         print("Dialogue:")
         print(input_text)
 
-        output = pipe(input_text, **pip_kwargs)[0]["summary_text"]
+        output = pipe(input_text, **pipe_kwargs)[0]["summary_text"]
         print("\nModel Summary:")
         print(output)
+
+        return output
