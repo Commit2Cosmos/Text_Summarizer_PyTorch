@@ -25,16 +25,16 @@ evaluate = "*"
 torch = {version = "*", index = "pytorch-nightly"}
 textsummarizer = {file = ".", editable = true}
 accelerate = "*"
-torchinfo = "*"
 transformers = "*"
 datasets = "*"
 
 [dev-packages]
+torchinfo = "*"
 torch-tb-profiler = "*"
 
 [requires]
 python_version = "3.11"
-python_full_version = "3.11.4"
+python_full_version = "3.11.9"
 
 [pipenv]
 allow_prereleases = true
