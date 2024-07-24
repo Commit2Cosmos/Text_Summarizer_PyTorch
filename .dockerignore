@@ -1,0 +1,12 @@
+submit_job_gcr.py
+artifacts/
+research/
+logs/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+testing.py
+template.py
+**/*.egg-info/

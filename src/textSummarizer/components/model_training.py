@@ -15,7 +15,7 @@ class ModelTraining:
     def train(self):
     
         tokenizer = AutoTokenizer.from_pretrained(self.config.model_ckpt)
-        model_pegasus: PreTrainedModel = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to('cpu')
+        model_pegasus: PreTrainedModel = AutoModelForSeq2SeqLM.from_pretrained(self.config.model_ckpt).to(self.config.device)
 
         #* freeze all layers
         for param in model_pegasus.parameters():
@@ -44,7 +44,6 @@ class ModelTraining:
             #TODO: ADD TO PARAMS
             save_total_limit=1,
             gradient_accumulation_steps=self.config.gradient_accumulation_steps,
-            use_cpu=True
         )
 
         for ds_name in self.config.datasets:

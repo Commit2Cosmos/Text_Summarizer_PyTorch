@@ -12,14 +12,11 @@ name = "pytorch-nightly"
 rouge-score = "*"
 nltk = "*"
 tqdm = "*"
-matplotlib = "*"
-notebook = "*"
 boto3 = "*"
 mypy-boto3-s3 = "*"
 python-box = "*"
 ensure = "*"
 fastapi = "*"
-polars = "*"
 uvicorn = "*"
 evaluate = "*"
 torch = {version = "*", index = "pytorch-nightly"}
@@ -27,10 +24,15 @@ textsummarizer = {file = ".", editable = true}
 accelerate = "*"
 transformers = "*"
 datasets = "*"
+sentencepiece = "*"
 
 [dev-packages]
 torchinfo = "*"
 torch-tb-profiler = "*"
+google-cloud-aiplatform = "*"
+matplotlib = "*"
+notebook = "*"
+
 
 [requires]
 python_version = "3.11"

@@ -4,6 +4,7 @@ from transformers import pipeline
 from transformers import AutoTokenizer
 from textSummarizer.config.configuration import ConfigManager
 from textSummarizer.entity import Pipeline
+from textSummarizer.logging import logger
 
 
 
@@ -15,8 +16,13 @@ class ModelInferencePipeline(Pipeline):
     
 
     def main(self, input_text: str):
+
+        if not os.path.exists(os.path.join(self.config.trained_folder, f"{self.config.trained_model_ckpt}-tokenizer")):
+            raise Exception("Trained tokenizer not found. Please train the model first.")
+
         
         tokenizer = AutoTokenizer.from_pretrained(os.path.join(self.config.trained_folder, f"{self.config.trained_model_ckpt}-tokenizer"))
+
         pipe_kwargs = {
             "length_penalty": self.config.length_penalty,
             "num_beams": self.config.num_beams,

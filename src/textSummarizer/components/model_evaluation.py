@@ -5,6 +5,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 from datasets import load_from_disk
 import json
 
+from textSummarizer.logging import logger
 from textSummarizer.entity import ModelEvaluationConfig
 
 
@@ -17,10 +18,14 @@ class ModelEvaluation:
 
     def evaluate(self):
 
-        tokenizer = AutoTokenizer.from_pretrained(os.path.join(self.config.trained_folder, f'{self.config.trained_tokenizer_ckpt}-tokenizer'))
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(os.path.join(self.config.trained_folder, f'{self.config.trained_tokenizer_ckpt}-tokenizer'))
 
-        rouge_metric = evaluate.load(self.config.metric_name)
-        model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(os.path.join(self.config.trained_folder, f'{self.config.trained_model_ckpt}-model')).to('cpu')
+            rouge_metric = evaluate.load(self.config.metric_name)
+            model_pegasus = AutoModelForSeq2SeqLM.from_pretrained(os.path.join(self.config.trained_folder, f'{self.config.trained_model_ckpt}-model')).to(self.config.device)
+        except EnvironmentError as e:
+            logger.error(f"Failed to load tokenizer: {e}")
+            raise
 
 
         def generate_batch_sized_chunks(list_of_elements, batch_size):
@@ -39,8 +44,8 @@ class ModelEvaluation:
                 
                 inputs = tokenizer(article_batch, max_length=self.config.input_max_length, truncation=True, padding="max_length", return_tensors="pt")
                 
-                summaries = model_pegasus.generate(input_ids=inputs["input_ids"].to('cpu'),
-                                                   attention_mask=inputs["attention_mask"].to('cpu'),
+                summaries = model_pegasus.generate(input_ids=inputs["input_ids"].to(self.config.device),
+                                                   attention_mask=inputs["attention_mask"].to(self.config.device),
                                                    length_penalty=self.config.length_penalty,
                                                    num_beams=self.config.num_beams,
                                                    max_length=self.config.target_max_length)
